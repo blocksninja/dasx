@@ -127,6 +127,7 @@ const static std::string allNetMessageTypes[] = {
     NetMsgType::MASTERNODEPAYMENTVOTE,
     // NetMsgType::MASTERNODEPAYMENTBLOCK, // there is no message for this, only inventory
     NetMsgType::MASTERNODEPAYMENTSYNC,
+    NetMsgType::MNANNOUNCE,
     NetMsgType::MNPING,
     NetMsgType::DSACCEPT,
     NetMsgType::DSVIN,
