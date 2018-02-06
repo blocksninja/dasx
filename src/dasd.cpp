@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2016 The Das Core developers
+// Copyright (c) 2014-2017 The Das Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "chainparams.h"
 #include "clientversion.h"
-#include "rpcserver.h"
+#include "rpc/server.h"
 #include "init.h"
 #include "noui.h"
 #include "scheduler.h"
@@ -14,7 +14,6 @@
 #include "masternodeconfig.h"
 #include "httpserver.h"
 #include "httprpc.h"
-#include "rpcserver.h"
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem.hpp>
@@ -91,12 +90,13 @@ bool AppInit(int argc, char* argv[])
         }
 
         fprintf(stdout, "%s", strUsage.c_str());
-        return false;
+        return true;
     }
 
     try
     {
-        if (!boost::filesystem::is_directory(GetDataDir(false)))
+        bool datadirFromCmdLine = mapArgs.count("-datadir") != 0;
+        if (datadirFromCmdLine && !boost::filesystem::is_directory(GetDataDir(false)))
         {
             fprintf(stderr, "Error: Specified data directory \"%s\" does not exist.\n", mapArgs["-datadir"].c_str());
             return false;
@@ -107,6 +107,11 @@ bool AppInit(int argc, char* argv[])
         } catch (const std::exception& e) {
             fprintf(stderr,"Error reading configuration file: %s\n", e.what());
             return false;
+        }
+        if (!datadirFromCmdLine && !boost::filesystem::is_directory(GetDataDir(false)))
+        {
+            fprintf(stderr, "Error: Specified data directory \"%s\" from config file does not exist.\n", mapArgs["-datadir"].c_str());
+            return EXIT_FAILURE;
         }
         // Check for -testnet or -regtest parameter (Params() calls are only valid after this clause)
         try {
@@ -132,13 +137,13 @@ bool AppInit(int argc, char* argv[])
         if (fCommandLine)
         {
             fprintf(stderr, "Error: There is no RPC client functionality in dasd anymore. Use the das-cli utility instead.\n");
-            exit(1);
+            exit(EXIT_FAILURE);
         }
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon)
         {
-            fprintf(stdout, "Das server starting\n");
+            fprintf(stdout, "Das Core server starting\n");
 
             // Daemonize
             pid_t pid = fork();
@@ -192,5 +197,5 @@ int main(int argc, char* argv[])
     // Connect dasd signal handlers
     noui_connect();
 
-    return (AppInit(argc, argv) ? 0 : 1);
+    return (AppInit(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE);
 }

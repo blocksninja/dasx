@@ -9,14 +9,10 @@ The following are some helpful notes on how to run Das on your native platform.
 
 ### Unix
 
-You need the Qt4 run-time libraries to run Das-Qt. On Debian or Ubuntu:
-
-	sudo apt-get install libqtgui4
-
 Unpack the files into a directory and run:
 
-- bin/32/das-qt (GUI, 32-bit) or bin/32/dasd (headless, 32-bit)
-- bin/64/das-qt (GUI, 64-bit) or bin/64/dasd (headless, 64-bit)
+- `bin/das-qt` (GUI) or
+- `bin/dasd` (headless)
 
 
 

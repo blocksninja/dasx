@@ -6,7 +6,7 @@ The multi masternode config allows to control multiple masternodes from a single
  * Mac OS: ~/Library/Application Support/Das/
  * Unix/Linux: ~/.das/
 
-`masternode.conf` format is a space seperated text file. Each line consisting of an alias, IP address followed by port, masternode private key, collateral output transaction id and collateral output index.
+`masternode.conf` is a space separated text file. Each line consists of an alias, IP address followed by port, masternode private key, collateral output transaction id and collateral output index.
 
 Example:
 ```
@@ -16,15 +16,16 @@ mn3 127.0.0.4:19399 92Da1aYg6sbenP6uwskJgEY2XWB5LwJ7bXRqc3UPeShtHWJDjDv db478e78
 ```
 
 In the example above:
-* the collateral for `mn1` is output `0` of transaction http://test.explorer.das.fr/tx/2bcd3c84c84f87eaa86e4e56834c92927a07f9e18718810b92e0d0324456a67c and it has amount of 1000 DAS
+* the collateral of 1000 DASH for `mn1` is output `0` of transaction [7603c20a05258c208b58b0a0d77603b9fc93d47cfa403035f87f3ce0af814566](https://test.explorer.dash.org/tx/7603c20a05258c208b58b0a0d77603b9fc93d47cfa403035f87f3ce0af814566)
+* the collateral of 1000 DASH for `mn2` is output `1` of transaction [5d898e78244f3206e0105f421cdb071d95d111a51cd88eb5511fc0dbf4bfd95f](https://test.explorer.dash.org/tx/5d898e78244f3206e0105f421cdb071d95d111a51cd88eb5511fc0dbf4bfd95f)
 
+_Note: IPs like 127.0.0.* are not allowed actually, we are using them here for explanatory purposes only. Make sure you have real reachable remote IPs in you `masternode.conf`._
 
-The following new RPC commands are supported:
-* list-conf: shows the parsed masternode.conf
+The following RPC commands are available (type `help masternode` in Console for more info):
+* list-conf
 * start-alias \<alias\>
+* start-all
 * start-missing
 * start-disabled
+* outputs
 * start-many
-* outputs: list available collateral output transaction ids and corresponding collateral output indexes
-
-When using remote masternode setup, you **must** remove `masternode=1` from local `das.conf` file if you had it there in previous versions. This option should be used only to start local Hot masternode now.
