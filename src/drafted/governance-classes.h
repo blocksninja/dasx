@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2016 The Das Core developers
+// Copyright (c) 2014-2017 The Das Core developers
 
 /*
  * FIELDS AND CLASSIFICATION
@@ -117,7 +117,7 @@ private:
     int nLevel;
     std::string strCategory;
 
-    // Current OBJECT STATUS (see http://govman.das.org/index.php/Documentation_:_Status_Field)
+    // Current OBJECT STATUS (see http://govman.dash.org/index.php/Documentation_:_Status_Field)
     int nStatusID;
     std::string strStatusMessage;
 
@@ -169,7 +169,7 @@ public:
         READWRITE(LIMITED_STRING(strURL, 64));
         READWRITE(nTime);
         READWRITE(vecSig);
-        READWRITE(nFeeTXHash);
+        READWRITE(nCollateralHash);
     }
 
 };
@@ -207,7 +207,7 @@ public:
 //         READWRITE(LIMITED_STRING(strURL, 64));
 //         READWRITE(nTime);
 //         READWRITE(vecSig);
-//         READWRITE(nFeeTXHash);
+//         READWRITE(nCollateralHash);
 //     }
 
 // };
@@ -260,7 +260,7 @@ public:
 //         READWRITE(LIMITED_STRING(strURL, 64));
 //         READWRITE(nTime);
 //         READWRITE(vecSig);
-//         READWRITE(nFeeTXHash);
+//         READWRITE(nCollateralHash);
 //     }
 
 // };
@@ -329,7 +329,7 @@ public:
 //         READWRITE(LIMITED_STRING(strURL, 64));
 //         READWRITE(nTime);
 //         READWRITE(vecSig);
-//         READWRITE(nFeeTXHash);
+//         READWRITE(nCollateralHash);
 //     }
 // };
 
@@ -394,7 +394,7 @@ public:
 //         READWRITE(LIMITED_STRING(strURL, 64));
 //         READWRITE(nTime);
 //         READWRITE(vecSig);
-//         READWRITE(nFeeTXHash);
+//         READWRITE(nCollateralHash);
 //     }
 
 // };
