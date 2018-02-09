@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2016 The Das Core developers
+// Copyright (c) 2014-2017 The Das Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -29,7 +29,7 @@
 #include "masternodeconfig.h"
 
 #include "init.h"
-#include "rpcserver.h"
+#include "rpc/server.h"
 #include "scheduler.h"
 #include "ui_interface.h"
 #include "util.h"
@@ -254,6 +254,7 @@ private:
 #endif
     int returnValue;
     const PlatformStyle *platformStyle;
+    std::unique_ptr<QWidget> shutdownWindow;
 
     void startThread();
 };
@@ -372,7 +373,7 @@ BitcoinApplication::~BitcoinApplication()
 #endif
     // Delete Qt-settings if user clicked on "Reset Options"
     QSettings settings;
-    if(optionsModel->resetSettings){
+    if(optionsModel && optionsModel->resetSettings){
         settings.clear();
         settings.sync();
     }
@@ -406,11 +407,11 @@ void BitcoinApplication::createWindow(const NetworkStyle *networkStyle)
 void BitcoinApplication::createSplashScreen(const NetworkStyle *networkStyle)
 {
     SplashScreen *splash = new SplashScreen(0, networkStyle);
-    // We don't hold a direct pointer to the splash screen after creation, so use
-    // Qt::WA_DeleteOnClose to make sure that the window will be deleted eventually.
-    splash->setAttribute(Qt::WA_DeleteOnClose);
+    // We don't hold a direct pointer to the splash screen after creation, but the splash
+    // screen will take care of deleting itself when slotFinish happens.
     splash->show();
     connect(this, SIGNAL(splashFinished(QWidget*)), splash, SLOT(slotFinish(QWidget*)));
+    connect(this, SIGNAL(requestedShutdown()), splash, SLOT(close()));
 }
 
 void BitcoinApplication::startThread()
@@ -450,6 +451,11 @@ void BitcoinApplication::requestInitialize()
 
 void BitcoinApplication::requestShutdown()
 {
+    // Show a simple window indicating shutdown status
+    // Do this first as some of the steps may take some time below,
+    // for example the RPC console may still be executing a command.
+    shutdownWindow.reset(ShutdownWindow::showShutdownWindow(window));
+
     qDebug() << __func__ << ": Requesting shutdown";
     startThread();
     window->hide();
@@ -463,9 +469,6 @@ void BitcoinApplication::requestShutdown()
 #endif
     delete clientModel;
     clientModel = 0;
-
-    // Show a simple window indicating shutdown status
-    ShutdownWindow::showShutdownWindow(window);
 
     // Request shutdown from core thread
     Q_EMIT requestedShutdown();
@@ -536,8 +539,8 @@ void BitcoinApplication::shutdownResult(int retval)
 
 void BitcoinApplication::handleRunawayException(const QString &message)
 {
-    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Das can no longer continue safely and will quit.") + QString("\n\n") + message);
-    ::exit(1);
+    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Das Core can no longer continue safely and will quit.") + QString("\n\n") + message);
+    ::exit(EXIT_FAILURE);
 }
 
 WId BitcoinApplication::getMainWinId() const
@@ -590,6 +593,7 @@ int main(int argc, char *argv[])
     //   Need to pass name here as CAmount is a typedef (see http://qt-project.org/doc/qt-5/qmetatype.html#qRegisterMetaType)
     //   IMPORTANT if it is no longer a typedef use the normal variant above
     qRegisterMetaType< CAmount >("CAmount");
+    qRegisterMetaType< std::function<void(void)> >("std::function<void(void)>");
 
     /// 3. Application identification
     // must be set before OptionsModel is initialized or translations are loaded,
@@ -609,9 +613,9 @@ int main(int argc, char *argv[])
     // but before showing splash screen.
     if (mapArgs.count("-?") || mapArgs.count("-h") || mapArgs.count("-help") || mapArgs.count("-version"))
     {
-        HelpMessageDialog help(NULL, mapArgs.count("-version"));
+        HelpMessageDialog help(NULL, mapArgs.count("-version") ? HelpMessageDialog::about : HelpMessageDialog::cmdline);
         help.showOrPrint();
-        return 1;
+        return EXIT_SUCCESS;
     }
 
     /// 5. Now that settings and translations are available, ask user for data directory
@@ -624,14 +628,14 @@ int main(int argc, char *argv[])
     {
         QMessageBox::critical(0, QObject::tr("Das Core"),
                               QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
-        return 1;
+        return EXIT_FAILURE;
     }
     try {
         ReadConfigFile(mapArgs, mapMultiArgs);
     } catch (const std::exception& e) {
         QMessageBox::critical(0, QObject::tr("Das Core"),
                               QObject::tr("Error: Cannot parse configuration file: %1. Only use key=value syntax.").arg(e.what()));
-        return false;
+        return EXIT_FAILURE;
     }
 
     /// 7. Determine network (and switch to network specific options)
@@ -645,7 +649,7 @@ int main(int argc, char *argv[])
         SelectParams(ChainNameFromCommandLine());
     } catch(std::exception &e) {
         QMessageBox::critical(0, QObject::tr("Das Core"), QObject::tr("Error: %1").arg(e.what()));
-        return 1;
+        return EXIT_FAILURE;
     }
 #ifdef ENABLE_WALLET
     // Parse URIs on command line -- this can affect Params()
@@ -661,11 +665,11 @@ int main(int argc, char *argv[])
 
 #ifdef ENABLE_WALLET
     /// 7a. parse masternode.conf
-    string strErr;
+    std::string strErr;
     if(!masternodeConfig.read(strErr)) {
         QMessageBox::critical(0, QObject::tr("Das Core"),
                               QObject::tr("Error reading masternode configuration file: %1").arg(strErr.c_str()));
-        return false;
+        return EXIT_FAILURE;
     }
 
     /// 8. URI IPC sending
@@ -675,7 +679,7 @@ int main(int argc, char *argv[])
     // - Do this after creating app and setting up translations, so errors are
     // translated properly.
     if (PaymentServer::ipcSendCommandLine())
-        exit(0);
+        exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
     // das: links repeatedly have their payment requests routed to this process:
