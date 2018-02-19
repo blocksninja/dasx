@@ -96,8 +96,8 @@ public:
         consensus.nPowTargetSpacing = 2.5 * 60; // Das: 2.5 minutes
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nPowKGWHeight = 15200;
-        consensus.nPowDGWHeight = 34140;
+        consensus.nPowKGWHeight = 12780;
+        consensus.nPowDGWHeight = 15000;
         consensus.nRuleChangeActivationThreshold = 1916; // 
         consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
@@ -111,8 +111,8 @@ public:
 
         // Deployment of DIP0001
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nStartTime = 1508025600; // Oct 15th, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nTimeout = 1539561600; // Oct 15th, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nStartTime = 1519898400; // March 1th, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nTimeout = 1527847200; // June 1th, 2018
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nWindowSize = 4032;
         consensus.vDeployments[Consensus::DEPLOYMENT_DIP0001].nThreshold = 3226; // 80% of 4032
 
@@ -143,12 +143,12 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0xe5a5eda714b503cba8f94fd77ea3160107a2052eb3f7fd59c96ab7e05945ad6f"));
 
 
-        vSeeds.push_back(CDNSSeedData("node", "35.184.44.214"));
-		vSeeds.push_back(CDNSSeedData("node2", "154.16.7.191"));
-		vSeeds.push_back(CDNSSeedData("lpool.name", "163.172.104.9"));
-		vSeeds.push_back(CDNSSeedData("node1.lpool.name", "46.101.171.245"));
-		vSeeds.push_back(CDNSSeedData("node2.lpool.name", "46.101.136.245"));
-		vSeeds.push_back(CDNSSeedData("node3.lpool.name", "207.154.223.205"));
+        // vSeeds.push_back(CDNSSeedData("node", "35.184.44.214"));
+		// vSeeds.push_back(CDNSSeedData("node2", "154.16.7.191"));
+		// vSeeds.push_back(CDNSSeedData("lpool.name", "163.172.104.9"));
+		// vSeeds.push_back(CDNSSeedData("node1.lpool.name", "46.101.171.245"));
+		// vSeeds.push_back(CDNSSeedData("node2.lpool.name", "46.101.136.245"));
+		// vSeeds.push_back(CDNSSeedData("node3.lpool.name", "207.154.223.205"));
 
 
         // Das addresses start with 'D'
@@ -275,7 +275,7 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3A)(0x59)(0xEA)(0x14).convert_to_container<std::vector<unsigned char> >();
         // Testnet das BIP32 prvkeys start with 'DPRV'
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3A)(0x58)(0xF3)(0x42).convert_to_container<std::vector<unsigned char> >();
-        // Testnet Dash BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet Das BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
@@ -398,7 +398,7 @@ public:
         // Regtest das BIP32 prvkeys start with 'DPRV'
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3A)(0x58)(0xF3)(0x42).convert_to_container<std::vector<unsigned char> >();
 
-        // Regtest Dash BIP44 coin type is '1' (All coin's testnet default)
+        // Regtest Das BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
    }
 };

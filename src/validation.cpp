@@ -3489,6 +3489,8 @@ bool ProcessNewBlock(const CChainParams& chainparams, const CBlock* pblock, bool
     {
         LOCK(cs_main);
 
+        LogPrintf("%s : BEGIN\n", __func__);
+
         // Store to disk
         CBlockIndex *pindex = NULL;
         if (fNewBlock) *fNewBlock = false;
