@@ -176,7 +176,7 @@
         <translation>Plånbok krypterad</translation>
     </message>
     <message>
-        <source>Das will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your dass from being stolen by malware infecting your computer.</source>
+        <source>Das will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your das from being stolen by malware infecting your computer.</source>
         <translation>Das kommer nu att färdigställa krypteringsprocessen. Kom ihåg att krypteringen av din plånbok inte kan skydda dig helt och hållet från att dina Das stjäls av skadeprogram som har infekterat din dator.</translation>
     </message>
     <message>
@@ -1436,7 +1436,7 @@ https://www.transifex.com/projects/p/das/</translation>
     </message>
     <message>
         <source>Open the Das debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Öppna Dass avsökningsloggfil från den nuvarande datakatalogen. Detta kan ta ett par sekunder för stora loggfiler.</translation>
+        <translation>Öppna Dashs avsökningsloggfil från den nuvarande datakatalogen. Detta kan ta ett par sekunder för stora loggfiler.</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -1508,7 +1508,7 @@ https://www.transifex.com/projects/p/das/</translation>
     </message>
     <message>
         <source>Welcome to the Das RPC console.</source>
-        <translation>Välkommen till Dass RPC-konsol.</translation>
+        <translation>Välkommen till Dashs RPC-konsol.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>

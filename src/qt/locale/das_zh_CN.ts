@@ -188,7 +188,7 @@
         <translation>钱包已加密</translation>
     </message>
     <message>
-        <source>Das will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your dass from being stolen by malware infecting your computer.</source>
+        <source>Das will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your das from being stolen by malware infecting your computer.</source>
         <translation>达世币软体现在要关闭，以完成加密过程。请注意，加密钱包不能完全防止恶意软件入侵你的电脑盗取你的达世币。</translation>
     </message>
     <message>
@@ -1457,7 +1457,7 @@ https://www.transifex.com/projects/p/das/</translation>
     </message>
     <message>
         <source>The denominations you submitted to the Masternode.&lt;br&gt;To mix, other users must submit the exact same denominations.</source>
-        <translation>您向主节点所提交的用以面额化混合的DAS,&lt;br&gt;当其他用户提交相同的面额化DAS数量时,将开始混合.</translation>
+        <translation>您向主节点所提交的用以面额化混合的DASH,&lt;br&gt;当其他用户提交相同的面额化DASH数量时,将开始混合.</translation>
     </message>
     <message>
         <source>(Last Message)</source>
@@ -3615,8 +3615,8 @@ https://www.transifex.com/projects/p/das/</translation>
         <translation>在白名单中的节点不会因为检测到DoS攻击而被停用. 来自这些节点的交易也一定会被转发, 即使说交易本神就来自记忆池. 适用于网关</translation>
     </message>
     <message>
-        <source>(9399 could be used only on mainnet)</source>
-        <translation>(9399 只能被用于主网)</translation>
+        <source>(9999 could be used only on mainnet)</source>
+        <translation>(9999 只能被用于主网)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -3959,8 +3959,8 @@ https://www.transifex.com/projects/p/das/</translation>
         <translation>无效主节点私钥。请查阅文件材料。</translation>
     </message>
     <message>
-        <source>(must be 9399 for mainnet)</source>
-        <translation>(设置 9399 为主网)</translation>
+        <source>(must be 9999 for mainnet)</source>
+        <translation>(设置 9999 为主网)</translation>
     </message>
     <message>
         <source>Can't find random Masternode.</source>

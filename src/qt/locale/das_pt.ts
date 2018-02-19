@@ -188,8 +188,8 @@
         <translation>Carteira cifrada</translation>
     </message>
     <message>
-        <source>Das will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your dass from being stolen by malware infecting your computer.</source>
-        <translation>O cliente Das irá fechar para finalizar o processo de cifra. Lembre-se que cifrar a sua carteira não consegue proteger totalmente as suas dass contra roubos feitos por malware presente no seu computador.</translation>
+        <source>Das will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your das from being stolen by malware infecting your computer.</source>
+        <translation>O cliente Das irá fechar para finalizar o processo de cifra. Lembre-se que cifrar a sua carteira não consegue proteger totalmente as suas das contra roubos feitos por malware presente no seu computador.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -3630,8 +3630,8 @@ https://www.transifex.com/projects/p/das/</translation>
         <translation>Definir o limite de processadores quando a geração está activa (-1 = todos, omissão: %d)</translation>
     </message>
     <message>
-        <source>Show N confirmations for a successfully locked transaction (0-9399, default: %u)</source>
-        <translation>Mostrar N confirmações para uma transacção bloqueada com sucesso (0-9399, omissão: %u)</translation>
+        <source>Show N confirmations for a successfully locked transaction (0-9999, default: %u)</source>
+        <translation>Mostrar N confirmações para uma transacção bloqueada com sucesso (0-9999, omissão: %u)</translation>
     </message>
     <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit &lt;https://www.openssl.org/&gt; and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
@@ -3654,8 +3654,8 @@ https://www.transifex.com/projects/p/das/</translation>
         <translation>Aviso: Por favor verifique que a data e a hora do computador está correcta! Se o relógio estiver errado o Das Core não vai funcionar correctamente.</translation>
     </message>
     <message>
-        <source>(9399 could be used only on mainnet)</source>
-        <translation>(9399 apenas pode ser usado para mainnet)</translation>
+        <source>(9999 could be used only on mainnet)</source>
+        <translation>(9999 apenas pode ser usado para mainnet)</translation>
     </message>
     <message>
         <source>(default: %s)</source>
@@ -4064,8 +4064,8 @@ https://www.transifex.com/projects/p/das/</translation>
         <translation>masternodeprivkey inválida. Por favor reveja a documentação.</translation>
     </message>
     <message>
-        <source>(must be 9399 for mainnet)</source>
-        <translation>(deve ser 9399 para mainnet)</translation>
+        <source>(must be 9999 for mainnet)</source>
+        <translation>(deve ser 9999 para mainnet)</translation>
     </message>
     <message>
         <source>Can't find random Masternode.</source>

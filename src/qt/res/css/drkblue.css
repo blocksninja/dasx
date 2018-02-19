@@ -740,16 +740,16 @@ QDialog#HelpMessageDialog QScrollBar:vertical, QDialog#HelpMessageDialog QScroll
 border:0;
 }
 
-/* About Dash Dialog */
+/* About Das Dialog */
 QDialog#AboutDialog {
 background-color:#F8F6F6;
 }
 
-QDialog#AboutDialog QLabel#label, QDialog#AboutDialog QLabel#copyrightLabel, QDialog#AboutDialog QLabel#label_2 { /* About Dash Contents */
+QDialog#AboutDialog QLabel#label, QDialog#AboutDialog QLabel#copyrightLabel, QDialog#AboutDialog QLabel#label_2 { /* About Das Contents */
 margin-left:10px;
 }
 
-QDialog#AboutDialog QLabel#label_2 { /* Margin for About Dash text */
+QDialog#AboutDialog QLabel#label_2 { /* Margin for About Das text */
 margin-right:10px;
 }
 
@@ -1078,6 +1078,24 @@ QWidget .QFrame#framePrivateSend .QPushButton#privateSendReset:pressed {
 border:1px solid #9e9e9e;
 }
 
+QWidget .QFrame#framePrivateSend .QPushButton#privateSendInfo { /* Info Button */
+background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: .01 #f6f6f6, stop: .1 rgba(250, 250, 250, 128), stop: .95 rgba(250, 250, 250, 255), stop: 1 #ebebeb);
+border:1px solid #d2d2d2;
+color:#616161;
+min-height:25px;
+font-size:9px;
+padding:0px;
+}
+
+QWidget .QFrame#framePrivateSend .QPushButton#privateSendInfo:hover {
+background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: .01 #f6f6f6, stop: .1 rgba(240, 240, 240, 255), stop: .95 rgba(240, 240, 240, 255), stop: 1 #ebebeb);
+color:#333;
+}
+
+QWidget .QFrame#framePrivateSend .QPushButton#privateSendInfo:pressed {
+border:1px solid #9e9e9e;
+}
+
 /* RECENT TRANSACTIONS */
 
 QWidget .QFrame#frame_2 { /* Transactions Widget */
@@ -1085,7 +1103,7 @@ min-width:410px;
 margin-right:20px;
 margin-left:0;
 margin-top:0;
-background-image: url(':/images/drkblue/dash_logo_horizontal');
+background-image: url(':/images/drkblue/das_logo_horizontal');
 background-repeat:none;
 }
 
@@ -1116,6 +1134,34 @@ font-size:12px;
 max-width:369px;
 margin-top:12px;
 margin-left:0px; /* CSS Voodoo - set to -66px to hide default transaction icons */
+}
+
+/* MODAL OVERLAY */
+
+QWidget#bgWidget { /* The 'frame' overlaying the overview-page */
+    background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: .01 #f6f6f6, stop: .1 rgba(250, 250, 250, 128), stop: .95 rgba(250, 250, 250, 255), stop: 1 #ebebeb);
+    color:#616161;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+QWidget#bgWidget .QPushButton#warningIcon {
+width:64px;
+height:64px;
+padding:5px;
+background-color:transparent;
+}
+
+QWidget#contentWidget { /* The actual content with the text/buttons/etc... */
+border-image: url(':/images/drkblue/drkblue_walletFrame_bg') 0 0 0 0 stretch stretch;
+border-top:0px solid #000;
+margin:0;
+padding-top:20px;
+padding-bottom: 20px;
+}
+
+QWidget#bgWidget .QPushButton#closeButton {
+
 }
 
 /* SEND DIALOG */
@@ -1202,7 +1248,7 @@ QDialog#SendCoinsDialog .QPushButton#addButton:pressed {
 border:1px solid #9e9e9e;
 }
 
-QDialog#SendCoinsDialog .QCheckBox#checkUseDarksend { /* PrivateSend Checkbox */
+QDialog#SendCoinsDialog .QCheckBox#checkUsePrivateSend { /* PrivateSend Checkbox */
 color:#616161;
 font-weight:bold;
 background: qradialgradient(cx:0.5, cy:0.5, radius: 0.5, fx:0.5, fy:0.5, stop:0 rgba(248, 246, 246, 128), stop: 1 rgba(0, 0, 0, 0));
@@ -1211,7 +1257,7 @@ padding-top:20px;
 padding-bottom:18px;
 }
 
-QDialog#SendCoinsDialog .QCheckBox#checkInstantX { /* InstantX Checkbox */
+QDialog#SendCoinsDialog .QCheckBox#checkUseInstantSend { /* InstantSend Checkbox */
 color:#616161;
 font-weight:bold;
 background: qradialgradient(cx:0.5, cy:0.5, radius: 0.5, fx:0.5, fy:0.5, stop:0 rgba(248, 246, 246, 128), stop: 1 rgba(0, 0, 0, 0));

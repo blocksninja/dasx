@@ -188,7 +188,7 @@
         <translation>Portafoglio cifrato</translation>
     </message>
     <message>
-        <source>Das will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your dass from being stolen by malware infecting your computer.</source>
+        <source>Das will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your das from being stolen by malware infecting your computer.</source>
         <translation>Das adesso si chiuderá per finire il processo di crittografia. Ricorda che crittografare il tuo portafoglio non ti da una protezione totale se il tuo computer é infettato da malware</translation>
     </message>
     <message>
