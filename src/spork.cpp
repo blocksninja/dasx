@@ -61,10 +61,13 @@ void CSporkManager::ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStr
         ExecuteSpork(spork.nSporkID, spork.nValue);
 
     } else if (strCommand == NetMsgType::GETSPORKS) {
-
+        LogPrintf("CSporkManager::ProcessSpork: Command: GETSPORKS\n");
         std::map<int, CSporkMessage>::iterator it = mapSporksActive.begin();
+        
+        LogPrintf("CSporkManager::ProcessSpork: sporks count: %d", mapSporksActive.size());
 
         while(it != mapSporksActive.end()) {
+            LogPrintf("CSporkManager::ProcessSpork: sending spork -- pfrom=%s, Spork: id=%d value=%d\n", pfrom->addrName, it->second.nSporkID, it->second.nValue);
             connman.PushMessage(pfrom, NetMsgType::SPORK, it->second);
             it++;
         }
