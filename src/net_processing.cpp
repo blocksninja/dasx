@@ -1080,24 +1080,28 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
     RandAddSeedPerfmon();
 
     LogPrint("net", "received: %s (%u bytes) peer=%d\n", SanitizeString(strCommand), vRecv.size(), pfrom->id);
+    LogPrint("net", "received: step %u peer=%d\n", 1, pfrom->id);
 
     if (mapArgs.count("-dropmessagestest") && GetRand(atoi(mapArgs["-dropmessagestest"])) == 0)
     {
         LogPrintf("dropmessagestest DROPPING RECV MESSAGE\n");
         return true;
     }
-
+    LogPrint("net", "received: step %u peer=%d\n", 2, pfrom->id);
     if (!(pfrom->GetLocalServices() & NODE_BLOOM) &&
               (strCommand == NetMsgType::FILTERLOAD ||
                strCommand == NetMsgType::FILTERADD ||
                strCommand == NetMsgType::FILTERCLEAR))
     {
+        LogPrint("net", "received: step %u peer=%d\n", 3, pfrom->id);
         if (pfrom->nVersion >= NO_BLOOM_VERSION) {
             LOCK(cs_main);
             Misbehaving(pfrom->GetId(), 100);
+            LogPrint("net", "received: step %u peer=%d\n", 3, pfrom->id);
             return false;
         } else if (GetBoolArg("-enforcenodebloom", false)) {
             pfrom->fDisconnect = true;
+            LogPrint("net", "received: step %u peer=%d\n", 4, pfrom->id);
             return false;
         }
     }
@@ -1117,6 +1121,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             connman.PushMessageWithVersion(pfrom, INIT_PROTO_VERSION, NetMsgType::REJECT, strCommand, REJECT_DUPLICATE, string("Duplicate version message"));
             LOCK(cs_main);
             Misbehaving(pfrom->GetId(), 1);
+            LogPrint("net", "received: step %u peer=%d\n", 5, pfrom->id);
             return false;
         }
 
@@ -1158,6 +1163,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             return false;
         }
 
+        LogPrint("net", "received: step %u peer=%d\n", 5, pfrom->id);
         if (nVersion == 10300)
             nVersion = 300;
         if (!vRecv.empty())
@@ -1263,6 +1269,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         // Must have a version message before anything else
         LOCK(cs_main);
         Misbehaving(pfrom->GetId(), 1);
+        LogPrint("net", "received: Misbehaving, must have a version message before anything else. peer=%d\n" ,pfrom->id);
         return false;
     }
 
@@ -2165,6 +2172,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         if (found)
         {
+            LogPrint("net", "ELSE command \"%s\" from peer=%d\n", SanitizeString(strCommand), pfrom->id);
             //probably one the extensions
 #ifdef ENABLE_WALLET
             privateSendClient.ProcessMessage(pfrom, strCommand, vRecv, connman);
