@@ -122,12 +122,8 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0xe5a5eda714b503cba8f94fd77ea3160107a2052eb3f7fd59c96ab7e05945ad6f"));
 
 
-        vSeeds.push_back(CDNSSeedData("node", "35.184.44.214"));
-		vSeeds.push_back(CDNSSeedData("node2", "154.16.7.191"));
-		vSeeds.push_back(CDNSSeedData("lpool.name", "163.172.104.9"));
-		vSeeds.push_back(CDNSSeedData("node1.lpool.name", "46.101.171.245"));
-		vSeeds.push_back(CDNSSeedData("node2.lpool.name", "46.101.136.245"));
-		vSeeds.push_back(CDNSSeedData("node3.lpool.name", "207.154.223.205"));
+        vSeeds.push_back(CDNSSeedData("das-seed-01.blocks.ninja", "13.81.82.28"));
+        vSeeds.push_back(CDNSSeedData("das-seed-02.blocks.ninja", "13.95.198.229"));
 
 
         // Das addresses start with 'D'
@@ -220,7 +216,6 @@ public:
 		
         vFixedSeeds.clear();
         vSeeds.clear();
-
 
         // Testnet das addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
