@@ -1685,21 +1685,28 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     if(nPrevHeight > 4500 || Params().NetworkIDString() != CBaseChainParams::MAIN) dDiff = ConvertBitsToDouble(nPrevBits);
 
     CAmount nSubsidy = 0;
-    if(nPrevHeight >= 5465) {
-        if((nPrevHeight >= 17000 && dDiff > 75) || nPrevHeight >= 24000) { // GPU/ASIC difficulty calc
-            // 2222222/(((x+2600)/9)^2)
-            nSubsidy = (2222222.0 / (pow((dDiff+2600.0)/9.0,2.0)));
-            if (nSubsidy > 25) nSubsidy = 25;
-            if (nSubsidy < 5) nSubsidy = 5;
-        } else { // CPU mining calc
-            nSubsidy = (11111.0 / (pow((dDiff+51.0)/6.0,2.0)));
+    if (nPrevHeight < 115000) { // TODO: block height for fork to be determined;
+        if(nPrevHeight >= 5465) {
+            if((nPrevHeight >= 17000 && dDiff > 75) || nPrevHeight >= 24000) { // GPU/ASIC difficulty calc
+                // 2222222/(((x+2600)/9)^2)
+                nSubsidy = (2222222.0 / (pow((dDiff+2600.0)/9.0,2.0)));
+                if (nSubsidy > 25) nSubsidy = 25;
+                if (nSubsidy < 5) nSubsidy = 5;
+            } else { // CPU mining calc
+                nSubsidy = (11111.0 / (pow((dDiff+51.0)/6.0,2.0)));
+                if (nSubsidy > 500) nSubsidy = 500;
+                if (nSubsidy < 25) nSubsidy = 25;
+            }
+        } else {
+            nSubsidy = (1111.0 / (pow((dDiff+1.0),2.0)));
             if (nSubsidy > 500) nSubsidy = 500;
-            if (nSubsidy < 25) nSubsidy = 25;
+            if (nSubsidy < 1) nSubsidy = 1;
         }
     } else {
-        nSubsidy = (1111.0 / (pow((dDiff+1.0),2.0)));
-        if (nSubsidy > 500) nSubsidy = 500;
-        if (nSubsidy < 1) nSubsidy = 1;
+        // New subsidy calculation (higher net hash means higher block reward)
+        nSubsidy = 40.0 - (37.0 * pow(0.9915,dDiff/11000));
+        if (nSubsidy > 40) nSubsidy = 40;
+        if (nSubsidy < 3) nSubsidy = 3;
     }
 
     // LogPrintf("height %u diff %4.2f reward %i \n", nPrevHeight, dDiff, nSubsidy);
