@@ -1701,7 +1701,8 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     if(nPrevHeight > 4500 || Params().NetworkIDString() != CBaseChainParams::MAIN) dDiff = ConvertBitsToDouble(nPrevBits);
 
     CAmount nSubsidy = 0;
-    if (nPrevHeight < 115000) { // TODO: block height for fork to be determined;
+    if ((Params().NetworkIDString() == CBaseChainParams::MAIN && nPrevHeight < 115000)
+        || Params().NetworkIDString() != CBaseChainParams::MAIN && nPrevHeight < 8100) { // TODO: block height for fork to be determined;
         if(nPrevHeight >= 5465) {
             if((nPrevHeight >= 17000 && dDiff > 75) || nPrevHeight >= 24000) { // GPU/ASIC difficulty calc
                 // 2222222/(((x+2600)/9)^2)
@@ -1720,7 +1721,11 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         }
     } else {
         // New subsidy calculation (higher net hash means higher block reward)
-        nSubsidy = 40.0 - (37.0 * pow(0.9915,dDiff/11000));
+        if (Params().NetworkIDString() == CBaseChainParams::MAIN) 
+            nSubsidy = 40.0 - (37.0 * pow(0.9915,dDiff/11000));
+        else
+            nSubsidy = 40.0 - (37.0 * pow(0.9915,dDiff/10));
+            
         if (nSubsidy > 40) nSubsidy = 40;
         if (nSubsidy < 3) nSubsidy = 3;
     }
@@ -1739,23 +1744,25 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
-    CAmount ret = blockValue/5; // start at 20%
+    int blocksDay = 576;
+    int p30_period = 115000     + (30*blocksDay); // height 115000 is the moment we move to the new block rewards
+    int p40_period = p30_period + (30*blocksDay);
+    int p50_period = p40_period + (30*blocksDay);
 
-    int nMNPIBlock = Params().GetConsensus().nMasternodePaymentsIncreaseBlock;
-    int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
-
-                                                                      // mainnet:
-    if(nHeight > nMNPIBlock)                  ret += blockValue / 20; // 158000 - 25.0% 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 1)) ret += blockValue / 20; // 175280 - 30.0% 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 2)) ret += blockValue / 20; // 192560 - 35.0% 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 3)) ret += blockValue / 40; // 209840 - 37.5% 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 4)) ret += blockValue / 40; // 227120 - 40.0% 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 5)) ret += blockValue / 40; // 244400 - 42.5% 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 6)) ret += blockValue / 40; // 261680 - 45.0% 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 7)) ret += blockValue / 40; // 278960 - 47.5% 
-    if(nHeight > nMNPIBlock+(nMNPIPeriod* 9)) ret += blockValue / 40; // 313520 - 50.0% 
-
-    return ret;
+    if (Params().NetworkIDString() != CBaseChainParams::MAIN) {
+        p30_period = 8100;
+        p40_period = 8400;
+        p50_period = 9700;
+    }
+    
+    if (nHeight >= p50_period)
+        return blockValue * 0.5;
+    else if (nHeight >= p40_period) 
+        return blockValue * 0.4
+    else if (nHeight >= p30_period) 
+        return blockValue * 0.3
+    else 
+        return blockValue * 0.2;
 }
 
 bool IsInitialBlockDownload()
