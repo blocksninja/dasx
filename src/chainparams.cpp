@@ -214,10 +214,13 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x000002c18a6d18023b3fea3160591c2f7dc87501d39163b0f43d52a2b23700de"));
         assert(genesis.hashMerkleRoot == uint256S("0xe5a5eda714b503cba8f94fd77ea3160107a2052eb3f7fd59c96ab7e05945ad6f"));
-		
+        
         vFixedSeeds.clear();
         vSeeds.clear();
-
+        
+        vSeeds.push_back(CDNSSeedData("das-seed-01.blocks.ninja", "13.81.82.28"));
+        vSeeds.push_back(CDNSSeedData("das-seed-02.blocks.ninja", "13.95.198.229"));
+        
         // Testnet das addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
         // Testnet das script addresses start with '8' or '9'
