@@ -1758,9 +1758,9 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     if (nHeight >= p50_period)
         return blockValue * 0.5;
     else if (nHeight >= p40_period) 
-        return blockValue * 0.4
+        return blockValue * 0.4;
     else if (nHeight >= p30_period) 
-        return blockValue * 0.3
+        return blockValue * 0.3;
     else 
         return blockValue * 0.2;
 }
