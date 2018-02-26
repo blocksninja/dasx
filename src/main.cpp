@@ -1702,7 +1702,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
     CAmount nSubsidy = 0;
     if ((Params().NetworkIDString() == CBaseChainParams::MAIN && nPrevHeight < 115000)
-        || Params().NetworkIDString() != CBaseChainParams::MAIN && nPrevHeight < 8100) { // TODO: block height for fork to be determined;
+        || (Params().NetworkIDString() != CBaseChainParams::MAIN && nPrevHeight < 810)0) { // TODO: block height for fork to be determined;
         if(nPrevHeight >= 5465) {
             if((nPrevHeight >= 17000 && dDiff > 75) || nPrevHeight >= 24000) { // GPU/ASIC difficulty calc
                 // 2222222/(((x+2600)/9)^2)
