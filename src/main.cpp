@@ -1010,8 +1010,6 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, int nHeig
         vInOutPoints.insert(txin.prevout);
     }
 
-    tx.
-
     // Check for blocked inputs
     if (nHeight >= 109356) { // Checkpoint-2
         std::string aBlockedTxs[] = {
