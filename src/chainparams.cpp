@@ -74,8 +74,8 @@ public:
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 210240; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
         consensus.nMasternodePaymentsStartBlock = 5000; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
-        consensus.nMasternodePaymentsIncreaseBlock = 158000; // actual historical value
-        consensus.nMasternodePaymentsIncreasePeriod = 576*30; // 17280 - actual historical value
+        consensus.nMasternodePaymentsIncreaseBlock = 158000; // actual historical value (not used)
+        consensus.nMasternodePaymentsIncreasePeriod = 576*30; // 17280 - actual historical value (not used)
         consensus.nBudgetPaymentsStartBlock = 328008; // actual historical value
         consensus.nBudgetPaymentsCycleBlocks = 16616; // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
         consensus.nBudgetPaymentsWindowBlocks = 100;
@@ -172,9 +172,9 @@ public:
     CTestNetParams() {
         strNetworkID = "test";
         consensus.nSubsidyHalvingInterval = 210240;
-        consensus.nMasternodePaymentsStartBlock = 10000; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
-        consensus.nMasternodePaymentsIncreaseBlock = 46000;
-        consensus.nMasternodePaymentsIncreasePeriod = 576;
+        consensus.nMasternodePaymentsStartBlock = 200; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
+        consensus.nMasternodePaymentsIncreaseBlock = 46000; // not used
+        consensus.nMasternodePaymentsIncreasePeriod = 576; // not used
         consensus.nBudgetPaymentsStartBlock = 78476;
         consensus.nBudgetPaymentsCycleBlocks = 50;
         consensus.nBudgetPaymentsWindowBlocks = 10;
@@ -214,7 +214,7 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x000002c18a6d18023b3fea3160591c2f7dc87501d39163b0f43d52a2b23700de"));
         assert(genesis.hashMerkleRoot == uint256S("0xe5a5eda714b503cba8f94fd77ea3160107a2052eb3f7fd59c96ab7e05945ad6f"));
-        
+
         vFixedSeeds.clear();
         vSeeds.clear();
         
