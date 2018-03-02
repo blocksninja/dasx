@@ -80,6 +80,7 @@ public:
     int PoolMaxTransactions() const { return nPoolMaxTransactions; }
     std::string SporkKey() const { return strSporkKey; }
     std::string MasternodePaymentPubKey() const { return strMasternodePaymentsPubKey; }
+    int MasternodePaymentsIncreasePeriod() const { return nMasternodePaymentsIncreasePeriod }
 protected:
     CChainParams() {}
 

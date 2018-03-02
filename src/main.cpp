@@ -1704,8 +1704,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     if(nPrevHeight > 4500 || Params().NetworkIDString() != CBaseChainParams::MAIN) dDiff = ConvertBitsToDouble(nPrevBits);
 
     CAmount nSubsidy = 0;
-    if ((Params().NetworkIDString() == CBaseChainParams::MAIN && nPrevHeight < 115000)
-        || (Params().NetworkIDString() != CBaseChainParams::MAIN && nPrevHeight < 8100)) { // TODO: block height for fork to be determined;
+    if (nPrevHeight + 1 < GetSporkValue(SPORK_14_REWARD_V2_UPDATE)) { 
         if(nPrevHeight >= 5465) {
             if((nPrevHeight >= 17000 && dDiff > 75) || nPrevHeight >= 24000) { // GPU/ASIC difficulty calc
                 // 2222222/(((x+2600)/9)^2)
@@ -1747,17 +1746,10 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
-    int blocksDay = 576;
-    int p30_period = 115000     + (30*blocksDay); // height 115000 is the moment we move to the new block rewards
-    int p40_period = p30_period + (30*blocksDay);
-    int p50_period = p40_period + (30*blocksDay);
+    int p30_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (1 * Params().MasternodePaymentsIncreasePeriod());
+    int p40_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (2 * Params().MasternodePaymentsIncreasePeriod());
+    int p50_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (3 * Params().MasternodePaymentsIncreasePeriod());
 
-    if (Params().NetworkIDString() != CBaseChainParams::MAIN) {
-        p30_period = 8100;
-        p40_period = 8400;
-        p50_period = 9700;
-    }
-    
     if (nHeight >= p50_period)
         return blockValue * 0.5;
     else if (nHeight >= p40_period) 
