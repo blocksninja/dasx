@@ -270,6 +270,7 @@ int CSporkManager::GetSporkIDByName(std::string strName)
     if(strName == "SPORK_11_RESET_BUDGET") return SPORK_11_RESET_BUDGET;
     if(strName == "SPORK_12_RECONSIDER_BLOCKS") return SPORK_12_RECONSIDER_BLOCKS;
     if(strName == "SPORK_13_ENABLE_SUPERBLOCKS") return SPORK_13_ENABLE_SUPERBLOCKS;
+    if(strName == "SPORK_14_REWARD_V2_UPDATE") return SPORK_13_ENABLE_SUPERBLOCKS;
 
     return -1;
 }
@@ -286,6 +287,7 @@ std::string CSporkManager::GetSporkNameByID(int id)
     if(id == SPORK_11_RESET_BUDGET) return "SPORK_11_RESET_BUDGET";
     if(id == SPORK_12_RECONSIDER_BLOCKS) return "SPORK_12_RECONSIDER_BLOCKS";
     if(id == SPORK_13_ENABLE_SUPERBLOCKS) return "SPORK_13_ENABLE_SUPERBLOCKS";
+    if(id == SPORK_14_REWARD_V2_UPDATE) return "SPORK_14_REWARD_V2_UPDATE";
 
     return "Unknown";
 }
