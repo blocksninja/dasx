@@ -1727,7 +1727,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         if (Params().NetworkIDString() == CBaseChainParams::MAIN) 
             nSubsidy = 40.0 - (37.0 * pow(0.9915,dDiff/11000));
         else
-            nSubsidy = 40.0 - (37.0 * pow(0.9915,dDiff/10));
+            nSubsidy = 40.0 - (37.0 * pow(0.9915,dDiff));
             
         if (nSubsidy > 40) nSubsidy = 40;
         if (nSubsidy < 3) nSubsidy = 3;
