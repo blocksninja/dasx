@@ -211,7 +211,7 @@ public:
         nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1498536001, 1027389, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1498536001, 1027389, 0x1e0ffff0, 1, 500000 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x000002c18a6d18023b3fea3160591c2f7dc87501d39163b0f43d52a2b23700de"));
         assert(genesis.hashMerkleRoot == uint256S("0xe5a5eda714b503cba8f94fd77ea3160107a2052eb3f7fd59c96ab7e05945ad6f"));
