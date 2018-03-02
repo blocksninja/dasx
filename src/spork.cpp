@@ -97,6 +97,7 @@ bool IsSporkActive(int nSporkID)
         if(nSporkID == SPORK_11_RESET_BUDGET) r = SPORK_11_RESET_BUDGET_DEFAULT;
         if(nSporkID == SPORK_12_RECONSIDER_BLOCKS) r = SPORK_12_RECONSIDER_BLOCKS_DEFAULT;
         if(nSporkID == SPORK_13_ENABLE_SUPERBLOCKS) r = SPORK_13_ENABLE_SUPERBLOCKS_DEFAULT;
+        if(nSporkID == SPORK_14_REWARD_V2_UPDATE) r = SPORK_14_REWARD_V2_UPDATE_DEFAULT;
 
         if(r == -1) LogPrintf("GetSpork::Unknown Spork %d\n", nSporkID);
     }
@@ -123,6 +124,7 @@ int64_t GetSporkValue(int nSporkID)
         if(nSporkID == SPORK_11_RESET_BUDGET) r = SPORK_11_RESET_BUDGET_DEFAULT;
         if(nSporkID == SPORK_12_RECONSIDER_BLOCKS) r = SPORK_12_RECONSIDER_BLOCKS_DEFAULT;
         if(nSporkID == SPORK_13_ENABLE_SUPERBLOCKS) r = SPORK_13_ENABLE_SUPERBLOCKS_DEFAULT;
+        if(nSporkID == SPORK_14_REWARD_V2_UPDATE) r = SPORK_14_REWARD_V2_UPDATE_DEFAULT;
 
         if(r == -1) LogPrintf("GetSpork::Unknown Spork %d\n", nSporkID);
     }
