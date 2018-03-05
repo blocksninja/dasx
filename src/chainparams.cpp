@@ -211,10 +211,12 @@ public:
         nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1498536001, 1027389, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1520248423, 1027389, 0x1e0ffff0, 1, 500000 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000002c18a6d18023b3fea3160591c2f7dc87501d39163b0f43d52a2b23700de"));
-        assert(genesis.hashMerkleRoot == uint256S("0xe5a5eda714b503cba8f94fd77ea3160107a2052eb3f7fd59c96ab7e05945ad6f"));
+        //std::cout << "genesis: " << consensus.hashGenesisBlock.ToString().c_str() << std::endl;
+        //std::cout << "merkle:  " << genesis.hashMerkleRoot.ToString().c_str() << std::endl;
+        assert(consensus.hashGenesisBlock == uint256S("0x45ea61597ad1fd5412826dbec25b8b3a664c935f12a1066882ad7f90ab027772"));
+        assert(genesis.hashMerkleRoot == uint256S("0xad485ba106bc9d68fe678e2ae8996496f314ce02f2ec71ed0b104b5bcb3d9ca6"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
