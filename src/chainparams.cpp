@@ -250,8 +250,8 @@ public:
         strMasternodePaymentsPubKey = "02eda2b8cfa9d8a2be18884168d64c4b7e5504bc1a09f650bbb281743a6915f969";
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (  0, uint256S("0x000002c18a6d18023b3fea3160591c2f7dc87501d39163b0f43d52a2b23700de")),
-            1498536001, // * UNIX timestamp of last checkpoint block
+            (  0, uint256S("0x45ea61597ad1fd5412826dbec25b8b3a664c935f12a1066882ad7f90ab027772")),
+            1520248423, // * UNIX timestamp of last checkpoint block
             0,    // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             2800        // * estimated number of transactions per day after checkpoint
