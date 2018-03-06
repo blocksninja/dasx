@@ -1746,9 +1746,10 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
-    int p30_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (1 * Params().MasternodePaymentsIncreasePeriod());
-    int p40_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (2 * Params().MasternodePaymentsIncreasePeriod());
-    int p50_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (3 * Params().MasternodePaymentsIncreasePeriod());
+    int nIncreasePeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
+    int p30_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (1 * nIncreasePeriod);
+    int p40_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (2 * nIncreasePeriod);
+    int p50_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (3 * nIncreasePeriod);
 
     if (nHeight >= p50_period)
         return blockValue * 0.5;
