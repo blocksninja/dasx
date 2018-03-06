@@ -30,7 +30,7 @@ void MineGenesisBlock(CBlock &genesis)
         {
             best = c;
             n=1;
-            std::cout << genesis.GetHash().GetHex().c_str() << " -- "  << hashTarget.GetHex().c_str() << " -- " << best.GetHex().c_str()) << std::endl;
+            std::cout << genesis.GetHash().GetHex().c_str() << " -- "  << hashTarget.GetHex().c_str() << " -- " << best.GetHex().c_str() << std::endl;
         }
         ++genesis.nNonce;
         if (genesis.nNonce == 0) 
