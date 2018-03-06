@@ -37,6 +37,6 @@ void MineGenesisBlock(CBlock &genesis)
             ++genesis.nTime;
     }
     //printf("HASH IS: %s\n", UintToArith256(genesis.GetHash()).ToString().c_str());
-    std::cout << "Converting genesis hash to string: " << genesis.ToString().c_str()) << std::endl; 
+    std::cout << "Converting genesis hash to string: " << genesis.ToString().c_str() << std::endl; 
 }
 #endif // DAS_CHAINPARAMSSEEDS_H
