@@ -30,14 +30,13 @@ void MineGenesisBlock(CBlock &genesis)
         {
             best = c;
             n=1;
-            printf("%s %s %s\n",genesis.GetHash().GetHex().c_str(),hashTarget.GetHex().c_str(),
-            best.GetHex().c_str());
+            std::cout << genesis.GetHash().GetHex().c_str() << " -- "  << hashTarget.GetHex().c_str() << " -- " << best.GetHex().c_str()) << std::endl;
         }
         ++genesis.nNonce;
         if (genesis.nNonce == 0) 
             ++genesis.nTime;
     }
     //printf("HASH IS: %s\n", UintToArith256(genesis.GetHash()).ToString().c_str());
-    printf("Converting genesis hash to string: %s\n",genesis.ToString().c_str()); 
+    std::cout << "Converting genesis hash to string: " << genesis.ToString().c_str()) << std::endl; 
 }
 #endif // DAS_CHAINPARAMSSEEDS_H
