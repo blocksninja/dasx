@@ -148,8 +148,8 @@ public:
         fTestnetToBeDeprecatedFieldRPC = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "047225a459304c1929440c7bd4fb9c400ab6b88ebc80be1d7a0ab12a9db0ae149651d0d32508ccfe615336ec0f302dfa7ba9c49276e317888ee4773313294a96a9";
-        strMasternodePaymentsPubKey = "047225a459304c1929440c7bd4fb9c400ab6b88ebc80be1d7a0ab12a9db0ae149651d0d32508ccfe615336ec0f302dfa7ba9c49276e317888ee4773313294a96a9";
+        strSporkKey = "023bc55d93438caaaed68482543e616c99d7fd8e9869aa906234a9952a5d945be3";
+        strMasternodePaymentsPubKey = "023bc55d93438caaaed68482543e616c99d7fd8e9869aa906234a9952a5d945be3";
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
