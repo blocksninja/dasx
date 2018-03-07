@@ -1754,10 +1754,10 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     int p40_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (2 * nIncreasePeriod);
     int p50_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (3 * nIncreasePeriod);
 
-    LogPrint("subsidy", "GetMasternodePayment: nIncreasePeriod=%u", nIncreasePeriod);
-    LogPrint("subsidy", "GetMasternodePayment: p30_period=%u", p30_period);
-    LogPrint("subsidy", "GetMasternodePayment: p40_period=%u", p40_period);
-    LogPrint("subsidy", "GetMasternodePayment: p50_period=%u", p50_period);
+    LogPrint("subsidy", "GetMasternodePayment: nIncreasePeriod=%u\n", nIncreasePeriod);
+    LogPrint("subsidy", "GetMasternodePayment: p30_period=%u\n", p30_period);
+    LogPrint("subsidy", "GetMasternodePayment: p40_period=%u\n", p40_period);
+    LogPrint("subsidy", "GetMasternodePayment: p50_period=%u\n", p50_period);
 
     if (nHeight >= p50_period)
         return blockValue * 0.5;
