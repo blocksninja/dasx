@@ -73,6 +73,7 @@ public:
     void Reset();
     void Process();
     bool IsSynced();
+    bool IsSporksSynced();
     bool IsBlockchainSynced();
     void ClearFulfilledRequest();
 
