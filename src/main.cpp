@@ -1704,8 +1704,8 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     if(nPrevHeight > 4500 || Params().NetworkIDString() != CBaseChainParams::MAIN) dDiff = ConvertBitsToDouble(nPrevBits);
 
     CAmount nSubsidy = 0;
-    LogPrintf("GetBlockSubsidy:: nPrevHeight=%u\n", nPrevHeight);
-    LogPrintf("GetBlockSubsidy:: Spork: SPORK_14_REWARD_V2_UPDATE=%u\n", GetSporkValue(SPORK_14_REWARD_V2_UPDATE));
+    LogPrint("subsidy", "GetBlockSubsidy:: nPrevHeight=%u\n", nPrevHeight);
+    LogPrint("subsidy", "GetBlockSubsidy:: Spork: SPORK_14_REWARD_V2_UPDATE=%u\n", GetSporkValue(SPORK_14_REWARD_V2_UPDATE));
     if (nPrevHeight + 1 < GetSporkValue(SPORK_14_REWARD_V2_UPDATE)) { 
         if(nPrevHeight >= 5465) {
             if((nPrevHeight >= 17000 && dDiff > 75) || nPrevHeight >= 24000) { // GPU/ASIC difficulty calc
@@ -1743,7 +1743,7 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     // Hard fork to reduce the block reward by 10 extra percent (allowing budget super-blocks)
     if(nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) nSubsidy -= nSubsidy/10;
 
-    LogPrintf("GetBlockSubsidy:: nSubsidy=%u\n", nSubsidy);
+    LogPrint("subsidy", "GetBlockSubsidy:: nSubsidy=%u\n", nSubsidy);
     return nSubsidy;
 }
 
@@ -1753,6 +1753,11 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
     int p30_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (1 * nIncreasePeriod);
     int p40_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (2 * nIncreasePeriod);
     int p50_period = GetSporkValue(SPORK_14_REWARD_V2_UPDATE) + (3 * nIncreasePeriod);
+
+    LogPrint("subsidy", "GetMasternodePayment: nIncreasePeriod=%u", nIncreasePeriod);
+    LogPrint("subsidy", "GetMasternodePayment: p30_period=%u", p30_period);
+    LogPrint("subsidy", "GetMasternodePayment: p40_period=%u", p40_period);
+    LogPrint("subsidy", "GetMasternodePayment: p50_period=%u", p50_period);
 
     if (nHeight >= p50_period)
         return blockValue * 0.5;
